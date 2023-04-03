@@ -1,0 +1,75 @@
+plugins {
+    id 'com.android.application'
+    id 'com.google.gms.google-services'
+}
+
+android {
+    compileSdk 32
+
+    defaultConfig {
+        applicationId "com.example.family_bet"
+        minSdk 23
+        targetSdk 30
+        versionCode 1
+        multiDexEnabled true
+        versionName "1.0"
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    viewBinding{
+        enabled=true;
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'com.google.android.material:material:1.7.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    //FIREBASE
+    implementation 'com.google.firebase:firebase-database:20.1.0'
+    implementation 'com.google.firebase:firebase-storage:20.1.0'
+
+    implementation 'com.google.android.gms:play-services-nearby:18.3.0'
+    //FCM
+    implementation 'com.google.firebase:firebase-messaging:23.1.1'
+    //youtube player
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:11.0.1'
+
+    //Countries picker
+    implementation 'com.hbb20:ccp:2.5.1'
+    implementation 'com.google.firebase:firebase-firestore:24.4.3'
+    implementation 'com.android.volley:volley:1.2.0'
+
+    testImplementation 'junit:junit:4.13.2'
+    //ADS
+    implementation 'com.yodo1.mas:full:4.8.3'
+    //GSON
+    implementation 'com.google.code.gson:gson:2.8.9'
+    //CIRCLE IMAGES
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    //LOAD IMAGES FROM URL
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.caverock:androidsvg:1.2.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'org.nanohttpd:nanohttpd:2.3.1'
+
+}

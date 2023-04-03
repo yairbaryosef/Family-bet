@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "480596177607",
+    "firebase_url": "https://family-bet-e1503-default-rtdb.firebaseio.com",
+    "project_id": "family-bet-e1503",
+    "storage_bucket": "family-bet-e1503.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:480596177607:android:e185872583026e92eb04e2",
+        "android_client_info": {
+          "package_name": "com.example.family_bet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "480596177607-6qnlil78kosmaksmdlfeb45qt8fn5u4j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCS2zuOTyIaeBdgywKYkFqFQn0ayQMeunE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "480596177607-6qnlil78kosmaksmdlfeb45qt8fn5u4j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

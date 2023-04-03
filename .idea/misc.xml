@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/drawable/circle.xml" value="0.146" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/drawable/circle2.xml" value="0.146" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/drawable/circle3.xml" value="0.116" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/drawable/circle_purple.xml" value="0.1835" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/drawable/ic_baseline_email_24.xml" value="0.146" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.146" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/drawable/line_black.xml" value="0.12" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/drawable/name.xml" value="0.146" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/drawable/password.xml" value="0.146" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/layout/activity_add.xml" value="0.14666666666666667" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/layout/activity_add_news.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/layout/activity_choosing_tours_details.xml" value="0.16145833333333334" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/layout/activity_dealear_menu.xml" value="0.16145833333333334" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/layout/activity_delar.xml" value="0.16145833333333334" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/layout/activity_init_games.xml" value="0.22" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/layout/activity_join_tour.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/layout/activity_join_tournament.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/layout/activity_list_with_search.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/layout/activity_main.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/layout/activity_predictor.xml" value="0.12" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/layout/activity_refiste_with_google.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/layout/activity_register.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/layout/activity_user.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/layout/activity_video_from_url.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/layout/add_link.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/layout/add_team.xml" value="0.14666666666666667" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/layout/bet_card.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/layout/card_for_adapters.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/layout/check_password.xml" value="0.17447916666666666" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/layout/contries_picker.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/layout/final_result.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/layout/game_bet.xml" value="0.22" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/layout/game_details.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/layout/header_user_menu.xml" value="0.17447916666666666" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/layout/subject.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/layout/table.xml" value="0.103125" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/layout/video_from_youtube.xml" value="0.17447916666666666" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/layout/webview.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/layout/yodo1_native_ad.xml" value="0.17447916666666666" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/menu/add_news_menu.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/menu/drawer.xml" value="0.144017094017094" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/menu/drawer_menu_student.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/yairb/AndroidStudioProjects/Family_bet/app/src/main/res/menu/predictor_menu.xml" value="0.17447916666666666" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.16666666666666666" />
+      </ProjectState>
+    </option>
+  </component>
+</project>

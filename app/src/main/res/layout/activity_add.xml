@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:theme="@style/Theme.MaterialComponents.Light.DarkActionBar"
+
+    tools:context=".View_Model.Tournament_activities.Add.Add_Activity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="114dp"
+        android:background="@drawable/grass"
+        android:gravity="center"
+        android:textAllCaps="true"
+        android:text="ADD Tournament"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="94dp"
+        android:layout_margin="16dp"
+        android:hint="tour_name"
+        android:textColorHint="#aaa"
+
+        app:helperText="only digits or letters"
+
+      >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tour_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:textColorHint="#000000"
+            android:hint="pick sport or create one"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+
+            <AutoCompleteTextView
+                android:id="@+id/sport"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                android:text="select" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textColorHint="#000000"
+        android:hint="pick league or create one"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+
+        <AutoCompleteTextView
+            android:id="@+id/league"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            android:text="select" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="94dp"
+        android:layout_margin="16dp"
+        android:hint="password"
+        android:textColorHint="#aaa"
+        app:counterEnabled="true"
+        app:passwordToggleEnabled="true"
+        app:helperText="password"
+
+        app:startIconDrawable="@drawable/password">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/right_bet"
+            android:layout_width="367dp"
+            android:layout_height="49dp"
+            android:layout_gravity="center"
+            android:background="@drawable/circle"
+            android:hint="points for right bet"
+            android:paddingLeft="15dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/bool_bet"
+            android:layout_gravity="center"
+            android:layout_width="367dp"
+            android:layout_height="49dp"
+            android:background="@drawable/circle"
+            android:hint="points for bool bet"
+            android:paddingLeft="15dp" />
+     <TextView
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"/>
+        <TextView
+        android:layout_width="276dp"
+        android:layout_height="55dp"
+        android:layout_gravity="center"
+        android:background="@drawable/circle2"
+        android:gravity="center"
+        android:text="add"
+            android:textAllCaps="true"
+        android:id="@+id/add"
+        android:textColor="@color/white"
+        android:textSize="40dp"
+        android:textStyle="bold" />
+
+    </LinearLayout>
+</ScrollView>

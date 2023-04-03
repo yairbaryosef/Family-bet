@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+
+    android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/basketball_bac"
+
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="25dp" />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card"
+        android:backgroundTint="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="464dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginRight="35dp"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="10dp">
+
+        <LinearLayout
+            android:layout_width="339dp"
+            android:layout_height="511dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="276dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:background="@drawable/circle2"
+                android:gravity="center"
+                android:text="Log in"
+                android:textColor="@color/white"
+                android:textSize="40dp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="33dp" />
+
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="260dp"
+                android:layout_height="59dp"
+                android:textColor="@color/black"
+                android:layout_gravity="center"
+                android:background="@drawable/circle"
+                android:drawableLeft="@drawable/ic_baseline_email_24"
+                android:drawablePadding="15dp"
+                android:hint="Email"
+                android:padding="8dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="38dp" />
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="260dp"
+                android:layout_height="59dp"
+                android:layout_gravity="center"
+
+                android:textColor="@color/black"
+                android:background="@drawable/circle"
+                android:drawableLeft="@drawable/password"
+                android:drawablePadding="15dp"
+                android:hint="Password"
+                android:padding="8dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/entrance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/circle2"
+
+                android:text="entrance"
+                android:textColor="@color/white"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <Button
+                android:id="@+id/register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/circle2"
+                android:text="register"
+                android:textColor="@color/white"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+
+                android:layout_height="36dp" />
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+
+      android:gravity="center|bottom">
+      <com.yodo1.mas.banner.Yodo1MasBannerAdView
+          xmlns:masads="http://schemas.android.com/apk/res-auto"
+          android:id="@+id/yodo1_mas_banner"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_horizontal|bottom"
+          masads:adSize="Banner" />
+  </LinearLayout>
+
+
+</LinearLayout>

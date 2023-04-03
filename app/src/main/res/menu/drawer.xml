@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <item android:title="join Tournament"
+        android:icon="@drawable/calendar_tournament"/>
+    <item android:title="add Tournament"
+        android:icon="@drawable/trophy"/>
+    <item android:title="add team"
+        android:icon="@drawable/sports"/>
+</menu>
