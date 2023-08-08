@@ -16,6 +16,8 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/Serenade"
+
         android:id="@+id/list"/>
     <LinearLayout
         android:layout_width="match_parent"

@@ -8,6 +8,9 @@ import com.example.family_bet.Classes.Constants.constants;
 import com.example.family_bet.Classes.Enteties.Predictor;
 import com.example.family_bet.Classes.Sorts.MergeSort;
 import com.example.family_bet.HTTP.MyHTTPServer;
+import com.example.family_bet.MESSAGES.Save_and_Get_Tour;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -20,8 +23,12 @@ public class Tournament_Controller {
         this.tournament=tournament;
     }
 
+    public Tournament_Controller(){
+
+    }
+
     /**
-     *
+     *Set total points to predictor based on his bets
      * @param predictor
      */
     public void set_Total_Point(Predictor predictor) {
@@ -48,7 +55,7 @@ public class Tournament_Controller {
 
     }
     /*
-    sort Predictors
+    sort Predictors by points
      */
     public ArrayList<Predictor> sort_Predictors(){
         int[] scores=new int[tournament.getPredictors().size()];
@@ -133,45 +140,90 @@ public class Tournament_Controller {
 
        } else {
 
+Update_Single_Bet(real_game,predictor,bet);
 
-           if ((real_game.getScore_home_team() > real_game.getScore_away_team()) && (bet.getScore_home_team_bet() > bet.getScore_away_team_bet())) {
-               System.out.println("home");
-               if ((real_game.getScore_home_team() == bet.getScore_home_team_bet()) && real_game.getScore_away_team() == bet.getScore_away_team_bet()) {
-                   bet.setStatus(constants.bool_bet);
-                   predictor.setTotal_points(predictor.getTotal_points() + tournament.getScore_for_bool_bet());
+       }
+   }
 
-               } else {
-                   bet.setStatus(constants.right_bet);
 
-                   predictor.setTotal_points(predictor.getTotal_points() + tournament.getScore_for_right_bet());
-
-               }
-           } else if ((real_game.getScore_home_team() < real_game.getScore_away_team()) && (bet.getScore_home_team_bet() < bet.getScore_away_team_bet())) {
-               System.out.println("away");
-               if ((real_game.getScore_home_team() == bet.getScore_home_team_bet()) && real_game.getScore_away_team() == bet.getScore_away_team_bet()) {
-                   bet.setStatus(constants.bool_bet);
-                   predictor.setTotal_points(predictor.getTotal_points() + tournament.getScore_for_bool_bet());
-
-               } else {
-                   bet.setStatus(constants.right_bet);
-                   predictor.setTotal_points(predictor.getTotal_points() + tournament.getScore_for_right_bet());
-
-               }
-           } else if ((real_game.getScore_home_team() == real_game.getScore_away_team()) && (bet.getScore_home_team_bet() == bet.getScore_away_team_bet())) {
-               System.out.println("draw");
-               if ((real_game.getScore_home_team() == bet.getScore_home_team_bet()) && real_game.getScore_away_team() == bet.getScore_away_team_bet()) {
-                   bet.setStatus(constants.bool_bet);
-                   predictor.setTotal_points(predictor.getTotal_points() + tournament.getScore_for_bool_bet());
-
-               } else {
-                   bet.setStatus(constants.right_bet);
-                   predictor.setTotal_points(predictor.getTotal_points() + tournament.getScore_for_right_bet());
-
-               }
+    /**
+     * update single bet based on game result
+     * @param real_game-real game
+     * @param predictor- the predictor for updating
+     * @param bet-his bet
+     */
+   public void Update_Single_Bet(Game real_game,Predictor predictor,Bet_On_Game bet){
+       if ((real_game.getScore_home_team() > real_game.getScore_away_team()) && (bet.getScore_home_team_bet() > bet.getScore_away_team_bet())) {
+           System.out.println("home");
+           if ((real_game.getScore_home_team() == bet.getScore_home_team_bet()) && real_game.getScore_away_team() == bet.getScore_away_team_bet()) {
+               bet.setStatus(constants.bool_bet);
+               predictor.setTotal_points(predictor.getTotal_points() + tournament.getScore_for_bool_bet());
 
            } else {
-               bet.setStatus(constants.wrong_bet);
+               bet.setStatus(constants.right_bet);
+
+               predictor.setTotal_points(predictor.getTotal_points() + tournament.getScore_for_right_bet());
+
+           }
+       } else if ((real_game.getScore_home_team() < real_game.getScore_away_team()) && (bet.getScore_home_team_bet() < bet.getScore_away_team_bet())) {
+           System.out.println("away");
+           if ((real_game.getScore_home_team() == bet.getScore_home_team_bet()) && real_game.getScore_away_team() == bet.getScore_away_team_bet()) {
+               bet.setStatus(constants.bool_bet);
+               predictor.setTotal_points(predictor.getTotal_points() + tournament.getScore_for_bool_bet());
+
+           } else {
+               bet.setStatus(constants.right_bet);
+               predictor.setTotal_points(predictor.getTotal_points() + tournament.getScore_for_right_bet());
+
+           }
+       } else if ((real_game.getScore_home_team() == real_game.getScore_away_team()) && (bet.getScore_home_team_bet() == bet.getScore_away_team_bet())) {
+           System.out.println("draw");
+           if ((real_game.getScore_home_team() == bet.getScore_home_team_bet()) && real_game.getScore_away_team() == bet.getScore_away_team_bet()) {
+               bet.setStatus(constants.bool_bet);
+               predictor.setTotal_points(predictor.getTotal_points() + tournament.getScore_for_bool_bet());
+
+           } else {
+               bet.setStatus(constants.right_bet);
+               predictor.setTotal_points(predictor.getTotal_points() + tournament.getScore_for_right_bet());
+
+           }
+
+       } else {
+           bet.setStatus(constants.wrong_bet);
+       }
+   }
+
+
+   public static int getBetStatus(int home,int away,int home_bet,int away_bet){
+       int sum=home-away;
+       int bet_sum=home_bet-away_bet;
+       if(sum*bet_sum>0&&(sum!=0&&bet_sum!=0)||(sum==0&&bet_sum==0)){
+           if(home==home_bet&&away==away_bet){
+               return 2;
+           }
+           else {
+               return 1;
            }
        }
+       else{
+           return 0;
+       }
+   }
+
+   public static void save_Tournament(Context context,Tournament tournament,String topic,String user){
+
+           SharedPreferences sp = context.getSharedPreferences(constants.tournament + " " + user, 0);
+           Gson gson = new Gson();
+           String json = gson.toJson(tournament);
+           SharedPreferences.Editor editor = sp.edit();
+           editor.putString(topic, json);
+           FirebaseMessaging.getInstance().subscribeToTopic(topic);
+           Save_and_Get_Tour sender = new Save_and_Get_Tour();
+           topic = "/topics/" + topic;
+         //  ProgressDialog p = new ProgressDialog(context);
+          // p.show();
+           sender.sent( tournament, topic);
+           editor.commit();
+
    }
 }

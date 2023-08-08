@@ -16,6 +16,7 @@ import com.example.family_bet.Classes.Enteties.Dealer;
 import com.example.family_bet.Classes.Enteties.User;
 import com.example.family_bet.Classes.Game.Game;
 import com.example.family_bet.Classes.Game.Tournament;
+import com.example.family_bet.DB.DB365.GAME_INIT;
 import com.example.family_bet.DB.Firestore;
 import com.example.family_bet.DB.Soccer.AL_LEAGUE;
 import com.example.family_bet.DB.Soccer.TOPS_SOCCER;
@@ -23,16 +24,14 @@ import com.example.family_bet.DB.WINNERLEAGUE.WinnerLeague;
 import com.example.family_bet.View_Model.User_Activity.Predictor_Activity.Profile_Adapter;
 import com.example.family_bet.View_Model.User_Activity.User_Activity;
 import com.example.family_bet.databinding.ActivityAddBinding;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 
 public class Add_Activity extends AppCompatActivity implements View.OnClickListener {
     ActivityAddBinding activityAddBinding;
+
    User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +45,10 @@ public class Add_Activity extends AppCompatActivity implements View.OnClickListe
       init_Listeners();
         init_leagues();
         init_sports();
+        initCountries();
 
     }
-    Profile_Adapter.profile profile,sport;
+    Profile_Adapter.profile profile,sport,country;
     /**
      * init all leagues to add a tournament based on exist league
      */
@@ -56,8 +56,8 @@ public class Add_Activity extends AppCompatActivity implements View.OnClickListe
         profile=new Profile_Adapter.profile("","else");
         ArrayList<Profile_Adapter.profile> profiles=new ArrayList<>();
         profiles.add(profile);
-        profiles.add(new Profile_Adapter.profile("WINNER LEAGUE",constants.winnerLeague));
-        profiles.add(new Profile_Adapter.profile(constants.al_League,constants.al_League));
+      //  profiles.add(new Profile_Adapter.profile("WINNER LEAGUE",constants.winnerLeague));
+        //profiles.add(new Profile_Adapter.profile(constants.al_League,constants.al_League));
         initallLeagues(profiles);
         Profile_Adapter profile_adapter=new Profile_Adapter(this,profiles);
         activityAddBinding.league.setAdapter(profile_adapter);
@@ -86,6 +86,11 @@ public class Add_Activity extends AppCompatActivity implements View.OnClickListe
         profiles.add(new Profile_Adapter.profile("https://crests.football-data.org/"+constants.netherlands_League_1_shortcut+".png",constants.netherlands_League_1_shortcut));
         profiles.add(new Profile_Adapter.profile("https://crests.football-data.org/"+constants.italy_League_1_shortcut+".png",constants.italy_League_1_shortcut));
         profiles.add(new Profile_Adapter.profile("https://crests.football-data.org/"+constants.portugol_League_1_shortcut+".png",constants.portugol_League_1_shortcut));
+
+        //NBA AND EURO LEAGUE
+       // profiles.add(new Profile_Adapter.profile("https://imagecache.365scores.com/image/upload/f_png,w_25,c_limit,q_auto:eco,dpr_3,d_Countries:Round:18.png/v3/Competitions/light/103",constants.nba));
+        //profiles.add(new Profile_Adapter.profile("https://imagecache.365scores.com/image/upload/f_png,w_25,c_limit,q_auto:eco,dpr_3,d_Countries:Round:18.png/v3/Competitions/light/569",constants.euroLeagueBasketball));
+
     }
 
     private void init_sports() {
@@ -112,6 +117,52 @@ public class Add_Activity extends AppCompatActivity implements View.OnClickListe
         activityAddBinding.add.setOnClickListener(this);
     }
 
+
+
+
+
+    private void initCountries(){
+        country=new Profile_Adapter.profile();
+        country.name="Israel";
+        try {
+
+             Gson gson=new Gson();
+            JsonObject jsonElements =gson.fromJson(constants.countries_JSON,JsonObject.class);
+            ArrayList<Profile_Adapter.profile> profiles=new ArrayList<>();
+
+            for (String element : jsonElements.keySet()) {
+                JsonObject country = jsonElements.get(element).getAsJsonObject();
+                String name = country.get("name").getAsString();
+                String picture = country.get("image").getAsString();
+                Profile_Adapter.profile profile = new Profile_Adapter.profile();
+                profile.name = name;
+                profile.resource = picture;
+                profiles.add(profile);
+
+            }
+            Profile_Adapter profile_adapter = new Profile_Adapter(this, profiles);
+            activityAddBinding.country.setAdapter(profile_adapter);
+            activityAddBinding.country.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    country = profiles.get(position);
+                    Toast.makeText(Add_Activity.this, country.name, Toast.LENGTH_SHORT).show();
+                    activityAddBinding.country.setText(country.name);
+
+                }
+
+
+            });
+        }
+        catch (Exception e){
+
+        }
+
+    }
+    /**
+     * on clic listeners
+     * @param v
+     */
     @Override
     public void onClick(View v) {
         if(v==activityAddBinding.add){
@@ -136,9 +187,9 @@ public class Add_Activity extends AppCompatActivity implements View.OnClickListe
 
 
             tournament.setDealer(dealer.getUsername());
-            progressDialog=new ProgressDialog(this);
-            progressDialog.setMessage("Loading");
-            progressDialog.show();
+            //progressDialog=new ProgressDialog(this);
+           // progressDialog.setMessage("Loading");
+          //  progressDialog.show();
              new LoadGamesTask().execute(tournament);
 
 
@@ -154,10 +205,20 @@ public class Add_Activity extends AppCompatActivity implements View.OnClickListe
         @Override
         protected ArrayList<Game> doInBackground(Tournament ...tournament) {
             ArrayList<Game> games=new ArrayList<>();
-
+            tournament[0].setCountry(country.name);
             if(profile.name.equals(constants.winnerLeague)) {
                games = new WinnerLeague().initWinner();
                 tournament[0].type=constants.winnerLeague;
+                tournament[0].setGames(games);
+            }
+            else if(profile.name.equals(constants.nba)){
+                games= GAME_INIT.getGamesFromHtml("103");
+                tournament[0].type=constants.nba;
+                tournament[0].setGames(games);
+            }
+            else if(profile.name.equals(constants.euroLeagueBasketball)){
+                games= GAME_INIT.getGamesFromHtml("569");
+                tournament[0].type=constants.euroLeagueBasketball;
                 tournament[0].setGames(games);
             }
             else if(profile.name.equals(constants.al_League)){
@@ -185,23 +246,7 @@ public class Add_Activity extends AppCompatActivity implements View.OnClickListe
 
                  */
     private void CHECK_TOURNAMENT(Tournament tournament) {
-
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference docRef = db.collection(constants.tournament).document(tournament.getSport_Type()).collection(tournament.getDealer()).document(tournament.getTour_name());
-        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (!documentSnapshot.exists()) {
-                    // The document does not exist
-                    initTour(tournament);
-                } else {
-                    // The document exists
-                    Toast.makeText(Add_Activity.this, "Tournament is already exist", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-
+       initTour(tournament);
     }
 
 
@@ -239,16 +284,20 @@ public class Add_Activity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         }
         else{
-            user.add_Tournament(Firestore.getPath(tournament.getCountry(),tournament.getDealer(),tournament.getSport_Type(),tournament.getTour_name()));
+            String path=Firestore.getPath(tournament.getCountry(),tournament.getDealer(),tournament.getSport_Type(),tournament.getTour_name());
+          //  Tour_for_Realtime tour=new Tour_for_Realtime(tournament.getPassword(),tournament.getGames().get(0),path);
+            user.getTournaments_id().add(path);
 
 
             user.setCount_tours(user.getCount_tours()+1);
             User.Save_user(user);
+            //String path=Firestore.getPath(tournament.getCountry(),tournament.getDealer(),tournament.getSport_Type(),tournament.getTour_name());
 
-            Tournament.save_tournament(tournament);
+              //  Tournament_Controller.save_Tournament(this, tournament, path, user.getUsername());
+Tournament.save_tournament(tournament);
 
-             progressDialog.dismiss();
-            Toast.makeText(Add_Activity.this, "tour saved", Toast.LENGTH_SHORT).show();
+           //  progressDialog.dismiss();
+//            Toast.makeText(Add_Activity.this, "tour saved", Toast.LENGTH_SHORT).show();
             Intent intent=new Intent(Add_Activity.this, User_Activity.class);
             startActivity(intent);
         }

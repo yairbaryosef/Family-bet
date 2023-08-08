@@ -1,6 +1,7 @@
 package com.example.family_bet.Classes.Enteties;
 
 import com.example.family_bet.Classes.Constants.constants;
+import com.example.family_bet.DB.Tours.Tour_for_Realtime;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -11,17 +12,20 @@ public class User {
     private String password;
     private String name;
     private String profile;
+    public ArrayList<Tour_for_Realtime> tour_for_realtimes;
     private ArrayList<Predictor> predictors;
     private ArrayList<String> tournaments_id;
     private int count_tours;
     public User(){
         tournaments_id=new ArrayList<>();
+        tour_for_realtimes=new ArrayList<>();
     }
     public User(String username,String password,String name){
         this.username=username;
         this.password=password;
         this.name=name;
         count_tours=0;
+        tour_for_realtimes=new ArrayList<>();
         tournaments_id=new ArrayList<>();
         Save_user(this);
 

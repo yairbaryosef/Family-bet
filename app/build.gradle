@@ -51,10 +51,21 @@ dependencies {
     //youtube player
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:11.0.1'
 
+
+    //SVG
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+
     //Countries picker
     implementation 'com.hbb20:ccp:2.5.1'
+
+    //firestore
     implementation 'com.google.firebase:firebase-firestore:24.4.3'
+
+    //notification
     implementation 'com.android.volley:volley:1.2.0'
+
+    //HTML CONVERTER
+    implementation 'org.jsoup:jsoup:1.14.3'
 
     testImplementation 'junit:junit:4.13.2'
     //ADS

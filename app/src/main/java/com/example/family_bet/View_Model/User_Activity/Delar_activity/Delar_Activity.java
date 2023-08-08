@@ -1,14 +1,21 @@
 package com.example.family_bet.View_Model.User_Activity.Delar_activity;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +29,10 @@ import com.example.family_bet.R;
 import com.example.family_bet.databinding.ActivityDelarBinding;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
+
+import java.util.Calendar;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Delar_Activity extends AppCompatActivity implements View.OnClickListener {
     Tournament tournament=new Tournament();
@@ -47,7 +58,7 @@ public class Delar_Activity extends AppCompatActivity implements View.OnClickLis
 
     private void update_game(Game game) {
         Dialog d=new Dialog(this);
-        d.setContentView(R.layout.bet_card);
+        d.setContentView(R.layout.bet_card_for_update);
         init_views_for_dialog(d,game);
 
        d.setOnDismissListener(new DialogInterface.OnDismissListener() {
@@ -62,6 +73,12 @@ public class Delar_Activity extends AppCompatActivity implements View.OnClickLis
     }
     ImageView home_team,away_team;
     TextView date,hour,home_name,away_name,score;
+
+    /**
+     * init all views to update game details
+     * @param convertView
+     * @param game
+     */
     private void init_views_for_dialog(Dialog convertView,Game game) {
         home_name = convertView.findViewById(R.id.home_name);
         away_name = convertView.findViewById(R.id.away_name);
@@ -139,6 +156,26 @@ public class Delar_Activity extends AppCompatActivity implements View.OnClickLis
             });
 
 
+
+        }
+        catch (Exception e){
+
+        }
+        try {
+            CircleImageView datePicker = convertView.findViewById(R.id.date_picker);
+
+            //set date
+            datePicker.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (v == datePicker) {
+
+                        createdialogDATE(game);
+
+
+                    }
+                }
+            });
         }
         catch (Exception e){
 
@@ -163,4 +200,51 @@ public class Delar_Activity extends AppCompatActivity implements View.OnClickLis
             Toast.makeText(this, "tournament update", Toast.LENGTH_SHORT).show();
         }
     }
+
+    /**
+     *
+     */
+    public void createdialogDATE(Game game)
+    {
+
+
+        Calendar calendar=Calendar.getInstance();
+        final int year=calendar.get(Calendar.YEAR);
+        final int month=calendar.get(Calendar.MONTH);
+        final int day=calendar.get(Calendar.DAY_OF_MONTH);
+        final int hour=calendar.get(Calendar.HOUR);
+        final int minute=calendar.get(Calendar.MINUTE);
+        DatePickerDialog datePickerDialog=new DatePickerDialog(this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,listener
+                ,year,month,day);
+        datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        datePickerDialog.show();
+        listener=new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                datePickerDialog.dismiss();
+                calendar_meet=Calendar.getInstance();
+                TimePickerDialog timePickerDialog=new TimePickerDialog(Delar_Activity.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+
+                        calendar_meet.set(year,month,dayOfMonth,hourOfDay,minute);
+                        java.util.Date d=calendar.getTime();
+                        date.setText(constants.date_format_by_day(calendar_meet.getTime()) + constants.date_format_by_time(calendar_meet.getTime()));
+                      game.setLast_date(calendar_meet.getTime());
+                        String dTE= (String) DateFormat.format("hh:mm aa",calendar_meet);
+
+                    }
+                },12,0,false);
+
+                timePickerDialog.updateTime(calendar_meet.getTime().getHours(),calendar_meet.getTime().getMinutes());
+                timePickerDialog.show();
+
+
+            }
+        };
+
+    }
+    DatePickerDialog.OnDateSetListener listener;
+    Calendar calendar_meet;
+
 }

@@ -2,6 +2,7 @@ package com.example.family_bet.View_Model.Fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +21,7 @@ import androidx.annotation.Nullable;
 import com.example.family_bet.Classes.Bets.Bet_On_Game;
 import com.example.family_bet.Classes.Constants.constants;
 import com.example.family_bet.Classes.Game.Tournament;
+import com.example.family_bet.Classes.Game.Tournament_Controller;
 import com.example.family_bet.R;
 import com.squareup.picasso.Picasso;
 import com.yodo1.mas.nativeads.Yodo1MasNativeAdView;
@@ -84,9 +87,23 @@ public class Bets_Adapter extends ArrayAdapter<Bet_On_Game> {
                 //  Toast.makeText(getContext(), String.valueOf(game.isIs_changed()), Toast.LENGTH_SHORT).show();
                 // if (game.isIs_changed()) {
 
-
                 try {
+                    try {
 
+
+                        int status = Tournament_Controller.getBetStatus(game.getGame().getScore_home_team(), game.getGame().getScore_away_team(), game.getScore_home_team_bet(), game.getScore_away_team_bet());
+
+                        if (status == 2) {
+                            LinearLayout cardView = convertView.findViewById(R.id.linear); // get reference to the CardView
+                            cardView.setBackgroundColor(Color.GREEN);
+                        } else if(status==0) {
+                            LinearLayout cardView = convertView.findViewById(R.id.linear); // get reference to the CardView
+                            cardView.setBackgroundColor(Color.RED);
+                        }
+                    }
+                    catch (Exception e){
+                      //  Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
 
                     if (game.isIs_changed()) {
                         EditText home_bet, away_bet;
@@ -95,6 +112,9 @@ public class Bets_Adapter extends ArrayAdapter<Bet_On_Game> {
                         home_bet.setText(String.valueOf(game.getScore_home_team_bet()));
 
                         away_bet.setText(String.valueOf(game.getScore_away_team_bet()));
+
+
+
                         //init earlier bets
                         home_bet.addTextChangedListener(new TextWatcher() {
                             @Override

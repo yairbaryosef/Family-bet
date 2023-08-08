@@ -11,7 +11,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DecodeFormat;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
 import com.example.family_bet.Classes.Constants.constants;
 import com.example.family_bet.R;
 import com.squareup.picasso.Picasso;
@@ -37,6 +40,16 @@ public class Profile_Adapter extends ArrayAdapter<Profile_Adapter.profile> {
            sent=0;
            this.resource=resource;
         }
+
+        @Override
+        public String toString() {
+            return "profile{" +
+                    "resource='" + resource + '\'' +
+                    ", name='" + name + '\'' +
+                    ", date=" + date +
+                    ", sent=" + sent +
+                    '}';
+        }
     }
     public Profile_Adapter(@NonNull Context context, ArrayList<profile> arrayList) {
         super(context, R.layout.subject,R.id.text3, arrayList);
@@ -59,6 +72,7 @@ public class Profile_Adapter extends ArrayAdapter<Profile_Adapter.profile> {
 imageView.setBackground(null);
 
         textView.setText(profile.name);
+
         try {
             try {
                Integer i= Integer.valueOf(profile.resource);
@@ -82,6 +96,21 @@ imageView.setBackground(null);
             }
         }
         catch (Exception e){
+
+        }
+        try {
+
+
+            RequestOptions requestOptions = new RequestOptions()
+                    .format(DecodeFormat.PREFER_ARGB_8888) // optional, to improve quality
+                    .override(Target.SIZE_ORIGINAL); // optional, to prevent scaling
+
+            Glide.with(getContext())
+                    .load(profile.resource)
+                    .apply(requestOptions)
+                    .into(imageView);
+        }
+        catch (Exception e1){
             imageView.setImageResource(R.drawable.trophy);
         }
 

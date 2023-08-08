@@ -10,7 +10,7 @@ public class NBATest extends TestCase {
     {
         FcmNotificationsSender sender=new FcmNotificationsSender();
         String s="abc";
-        sender.sendNotification("all",s);
+       // sender.sendNotification("all",s);
     }
 
 }

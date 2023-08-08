@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.family_bet.ADS;
@@ -66,77 +67,64 @@ public class User_Activity extends AppCompatActivity implements NavigationView.O
     CircleImageView imageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        user_binding=ActivityUserBinding.inflate(getLayoutInflater());
-        setContentView(user_binding.getRoot());
-        drawer = findViewById(R.id.drawer_layout);
-        navigationView=findViewById(R.id.menu);
-        navigationView.setItemIconTintList(null);
+        try {
+            super.onCreate(savedInstanceState);
+            user_binding = ActivityUserBinding.inflate(getLayoutInflater());
+            setContentView(user_binding.getRoot());
+            drawer = findViewById(R.id.drawer_layout);
+            navigationView = findViewById(R.id.menu);
+            navigationView.setItemIconTintList(null);
 
-        navigationView.setNavigationItemSelectedListener(this);
-        View headerView = navigationView.getHeaderView(0);
-      imageView = headerView.findViewById(R.id.image);
-        textView=headerView.findViewById(R.id.username);
-        init_user();
+            navigationView.setNavigationItemSelectedListener(this);
+            View headerView = navigationView.getHeaderView(0);
+            imageView = headerView.findViewById(R.id.image);
+            textView = headerView.findViewById(R.id.username);
+            init_user();
+            user_binding.back.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    user_binding.drawerLayout.openDrawer(GravityCompat.START);
+                }
+            });
 
 
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-imageView.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
+                    Intent gallery = new Intent();
+                    gallery.setType("image/*");
+                    isProfile = true;
+                    gallery.setAction(Intent.ACTION_GET_CONTENT);
+                    startActivityForResult(Intent.createChooser(gallery, "Select picture"), PICK_IM);
 
-            Intent gallery=new Intent();
-            gallery.setType("image/*");
-            isProfile=true;
-            gallery.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(Intent.createChooser(gallery,"Select picture"),PICK_IM);
+                }
+            });
 
-    }
-});
+            Yodo1MasAdBuildConfig config = new Yodo1MasAdBuildConfig.Builder().enableUserPrivacyDialog(true).build();
+            Yodo1Mas.getInstance().setAdBuildConfig(config);
+            Yodo1Mas.getInstance().initMas(this, "lOwAkhK2fP", new Yodo1Mas.InitListener() {
+                @Override
+                public void onMasInitSuccessful() {
 
-        Yodo1MasAdBuildConfig config = new Yodo1MasAdBuildConfig.Builder().enableUserPrivacyDialog(true).build();
-        Yodo1Mas.getInstance().setAdBuildConfig(config);
-        Yodo1Mas.getInstance().initMas(this, "lOwAkhK2fP", new Yodo1Mas.InitListener() {
-            @Override
-            public void onMasInitSuccessful() {
+                    Yodo1Mas.getInstance().showInterstitialAd(User_Activity.this);
+                }
 
-                Yodo1Mas.getInstance().showInterstitialAd(User_Activity.this);
-            }
-
-            @Override
-            public void onMasInitFailed(@NonNull Yodo1MasError error) {
-            }
-        });
-        ADS.show_Banner(this);
+                @Override
+                public void onMasInitFailed(@NonNull Yodo1MasError error) {
+                }
+            });
+            ADS.show_Banner(this);
+        }
+        catch (Exception e){
+        //    Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 ArrayList<Tournament> tournaments;
     private void init_tournaments() {
         tournaments=new ArrayList<>();
      try {
-
-
          CollectionReference ref = FirebaseFirestore.getInstance().collection(constants.tournament);
-
-         for(String s:user.getTournaments_id()){
-             try {
-
-
-                 int count = 0;
-                 for (String string : user.getTournaments_id()) {
-                     if (string.equals(s)) {
-                         count++;
-
-                     }
-
-                 }
-                 if (count > 1) {
-                     user.getTournaments_id().remove(s);
-                 }
-             }catch (Exception e){
-
-             }
-
-         }
          ref.whereIn(constants.key, user.getTournaments_id()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
              @Override
              public void onSuccess(QuerySnapshot documentSnapshot) {
@@ -156,13 +144,13 @@ ArrayList<Tournament> tournaments;
                      InitAdapter();
 
                  } catch (Exception e) {
-                       user_binding.username.setText(e.getMessage());
+                      // user_binding.username.setText(e.getMessage());
                  }
              }
          });
      }
      catch (Exception e){
-         user_binding.username.setText(e.getMessage());
+      //   user_binding.username.setText(e.getMessage());
      }
 
     }
@@ -217,7 +205,8 @@ ArrayList<Tournament> tournaments;
                 catch (Exception e){
 
                 }
-                init_tournaments();
+               init_tournaments();
+
                 Toast.makeText(User_Activity.this, user.getUsername(), Toast.LENGTH_SHORT).show();
 
             }

@@ -70,14 +70,14 @@ public class FcmNotificationsSender  {
 
     private OkHttpClient client = new OkHttpClient();
 
-    public void sendNotification(String topic,String title) throws IOException, JSONException {
+    public void sendNotification(String topic,String title,String body1) throws IOException, JSONException {
         JsonObject data = new JsonObject();
 
-        data.addProperty("to", "/topics/all");
+        data.addProperty("to", topic);
 
         JsonObject notification = new JsonObject();
-        notification.addProperty("title", "Title of your notification");
-        notification.addProperty("body", "abc");
+        notification.addProperty("title", title);
+        notification.addProperty("body", body1);
         JsonElement element=notification.getAsJsonObject();
         data.add("notification", element);
 

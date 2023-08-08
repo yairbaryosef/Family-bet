@@ -190,8 +190,10 @@ links=new ArrayList<>();
 
             }
         }
+
         HashMap<String,String> tournamentHashMap=new HashMap<>();
-        Gson gson=new Gson();
+        Gson gson;
+        gson = new Gson();
         String s=gson.toJson(tournament);
         tournamentHashMap.put(constants.tournament,s);
         Firestore.save(tournamentHashMap);
@@ -297,6 +299,10 @@ links=new ArrayList<>();
         return  path;
 
     }
+
+   public String getTopic(){
+        return country+"_"+sport_Type+"_"+dealer+"_"+tour_name;
+   }
 
 
 

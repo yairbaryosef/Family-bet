@@ -111,14 +111,22 @@ public class Firestore {
 
         Map<String,Object> hashMap=documentSnapshot.getData();
         String json=(String) hashMap.get(constants.tournament);
-        Gson gson=new Gson();
+       Tournament tournament=initTour_from_String(json);
+
+       // Tournament t=gson.fromJson(json,Tournament.class);
+        return tournament;
+    }
+
+
+    public static Tournament initTour_from_String(String json){
+
         Tournament tournament=new Tournament();
         JsonObject jsonObject = JsonParser.parseString(json).getAsJsonObject();
         JsonArray gamesArray = jsonObject.get("games").getAsJsonArray();
         for(JsonElement element:gamesArray){
-           JsonObject g= element.getAsJsonObject();
-           Game game=initGame_From_json(g);
-           tournament.getGames().add(game);
+            JsonObject g= element.getAsJsonObject();
+            Game game=initGame_From_json(g);
+            tournament.getGames().add(game);
         }
         tournament.setDealer(jsonObject.get("dealer").getAsString());
         tournament.setTour_name(jsonObject.get("tour_name").getAsString());
@@ -156,10 +164,7 @@ public class Firestore {
         catch (Exception e){
 
         }
-
-
-       // Tournament t=gson.fromJson(json,Tournament.class);
-        return tournament;
+      return  tournament;
     }
 
     /**
